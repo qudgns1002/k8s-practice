@@ -10,6 +10,7 @@ apps/
 └── hello-k8s/
     └── base/
         ├── namespace.yaml
+        ├── configmap.yaml
         ├── deployment.yaml
         ├── service.yaml
         └── kustomization.yaml
@@ -50,6 +51,9 @@ kubectl get pods -n hello-k8s -w
 kubectl port-forward -n hello-k8s service/hello-k8s 8080:80
 curl http://localhost:8080
 ```
+
+`Hello from Kubernetes!`가 표시되면 ConfigMap의 `index.html`이 NGINX에
+정상적으로 mount된 것입니다.
 
 ## 다음 실습 순서
 
