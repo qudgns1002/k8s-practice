@@ -55,9 +55,21 @@ curl http://localhost:8080
 `Hello from Kubernetes!`가 표시되면 ConfigMap의 `index.html`이 NGINX에
 정상적으로 mount된 것입니다.
 
+## 4. Ingress로 접근
+
+기존 NGINX Ingress Controller와 로컬 DNS의 `k8s.core` 호스트를 사용합니다.
+
+```bash
+curl http://k8s.core/hello-k8s
+kubectl get ingress -n hello-k8s
+```
+
+`/hello-k8s` 경로는 Ingress에서 `/`로 rewrite되어 `hello-k8s` Service에
+전달됩니다.
+
 ## 다음 실습 순서
 
 1. ConfigMap으로 NGINX 응답 페이지 변경
 2. Deployment replica와 rolling update 관찰
 3. Service 유형과 내부 DNS 확인
-4. Ingress Controller 설치 및 Ingress 추가
+4. Ingress 경로 rewrite와 host 기반 라우팅 확장

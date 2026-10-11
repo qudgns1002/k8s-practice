@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-k8s
+  namespace: hello-k8s
+  labels:
+    app.kubernetes.io/name: hello-k8s
+    app.kubernetes.io/part-of: k8s-practice
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: k8s.core
+      http:
+        paths:
+          - path: /hello-k8s(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: hello-k8s
+                port:
+                  number: 80
