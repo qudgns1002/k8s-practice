@@ -58,11 +58,15 @@ curl http://localhost:8080
 ## 4. Ingress로 접근
 
 기존 NGINX Ingress Controller와 로컬 DNS의 `k8s.core` 호스트를 사용합니다.
+이 환경의 HTTPS NodePort는 `31443`입니다.
 
 ```bash
-curl http://k8s.core/hello-k8s
+curl https://k8s.core:31443/hello-k8s
 kubectl get ingress -n hello-k8s
 ```
+
+로컬 인증서를 신뢰하지 않아 `curl`의 인증서 검증이 실패하면, 학습 환경에서만
+`curl -k https://k8s.core:31443/hello-k8s`로 확인합니다.
 
 `/hello-k8s` 경로는 Ingress에서 `/`로 rewrite되어 `hello-k8s` Service에
 전달됩니다.
